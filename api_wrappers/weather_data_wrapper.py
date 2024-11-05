@@ -1,11 +1,11 @@
-from api import met_office_api
+from api_wrappers.api import met_office_api
+import json
 class WeatherDataAPI:
+    latitude = 53.800755
+    longitude = -1.549077
 
-    datahub = None
-
-    def __init__(self):
-        self.datahub = met_office_api.init_data_source()
 
     def get_data(self):
-        data = met_office_api.get_data(self.datahub)
-        return data
+        data = met_office_api.retrieve_forecast(self.latitude, self.longitude)
+
+        return json.loads(data.text)
